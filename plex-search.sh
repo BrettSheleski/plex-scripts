@@ -6,4 +6,4 @@ plexToken=`cat user.json | jq -r .user.authToken`
 
 searchTerm=$1
 
-curl -X GET  -H "X-Plex-Token: aSKm4Dx59sfnEk1kDP8Y"  http://"$plexServer":$plexPort/search?query=searchTerm
+curl -X GET  -H "X-Plex-Token: $plexToken"  http://"$plexServer":$plexPort/search?query=$searchTerm
