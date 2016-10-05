@@ -11,5 +11,5 @@ curl -s -X POST -H "Authorization: Basic $credentials" \
              -H "X-Plex-Client-Identifier: $plexClientIdentifier"\
              -H "X-Plex-Product: $plexProduct"\
              -H "X-Plex-Version: $plexVersion"\
-             "$url"
+             "$url" --output user.json
 
