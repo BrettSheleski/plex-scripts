@@ -4,8 +4,8 @@ read -p "Plex Username: " username
 read -s -p "Plex Password: " password
 
 credentials=`echo -n "$username":"$password"| base64`
-plexClientIdentifier="TESTSCRIPTV1"
-plexProduct="Test script"
+plexClientIdentifier="PlexBash"
+plexProduct="Bash Script"
 plexVersion="V1"
 
 url="https://plex.tv/users/sign_in.json"
