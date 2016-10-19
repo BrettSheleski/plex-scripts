@@ -1,0 +1,49 @@
+#!/bin/bash
+
+username=""
+apikey=""
+userkey=""
+
+while [[ $# -gt 1 ]]
+do
+key="$1"
+case $key in
+    -u|--user)
+    username="$2"
+    shift
+    ;;
+    -ak|--api-key)
+    apikey="$2"
+    shift
+    ;;
+    -uk|--user-key)
+    userkey="$2"
+    shift
+    ;;
+esac
+shift # past argument or value
+done
+
+if [ -z "$username" ]; then
+    read -p "The TVDB Username: " username
+fi
+
+if [ -z "$apikey" ]; then
+    read -p "The TVDB API Key: " apikey
+fi
+
+if [ -z "$userkey" ]; then
+    read -p "The TVDB User Key: " userkey
+fi
+
+
+json="{\"apikey\":\"$apikey\", \"username\":\"$username\",\"userkey\":\"$userkey\"}"
+
+url="https://api.thetvdb.com/login"
+
+json=`curl -s -X POST -H "Content-Type: application/json"\
+                -H "Accept: application/json"\
+                -d "$json"\
+                "$url"`
+
+echo "$json"

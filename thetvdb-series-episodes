@@ -1,0 +1,55 @@
+#!/bin/bash
+
+thetvdbToken=""
+season=""
+episode=""
+
+
+while [[ $# -gt 1 ]]
+do
+key="$1"
+case $key in
+    -t|--token)
+    thetvdbToken="$2"
+    shift
+    ;;
+    -s|--season)
+    season="$2"
+    shift
+    ;;
+    -e|--episode)
+    episode="$2"
+    shift
+    ;;
+esac
+shift # past argument or value
+done
+
+if [ -z $thetvdbToken ]; then
+    thetvdbToken=$(./thetvdb-login | jq -r .token)
+
+    echo Using token: "$thetvdbToken"
+fi
+
+series=$1
+
+seasonParm=""
+episodeParm=""
+
+url="https://api.thetvdb.com/series/$series/episodes"
+
+if [ ! -z "$season" ]; then
+  seasonParm="--data-urlencode airedSeason=$season"
+  url="https://api.thetvdb.com/series/$series/episodes/query"
+fi
+
+if [ ! -z "$episode" ]; then
+  episodeParm="--data-urlencode airedEpisode=$episode"
+  url="https://api.thetvdb.com/series/$series/episodes/query"
+fi
+
+
+curl -G -X GET -H "Authorization: Bearer $thetvdbToken" \
+               -H "Accept: application/json" \
+               $seasonParm $episodeParm \
+               "$url"
