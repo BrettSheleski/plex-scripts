@@ -1,5 +1,11 @@
 # plex-scripts
-Bash scripts for working with plex
+Various scripts for working with plex
+
+## PlexGrab.py
+Python (v2.x) script for getting various information of a recording (aka: 'grab').
+
+### Usage:
+`python2 PlexGrab.py <PLEX_DB_PATH> <GRAB_ID>`
 
 ## plex-login
 Used to log into Plex and retrieve, among other things, an Authentication Token
