@@ -48,6 +48,9 @@ LIMIT 0,1
 		cursor=self.db.cursor()
 		cursor.execute(sql)
 		grabInfo=cursor.fetchone()
+
+		if grabInfo is None:
+			return None
 		if grabInfo["subscription_data"] is not None:
 			grabInfo["subscription_data"] = urlparse.parse_qs(grabInfo["subscription_data"])
 
